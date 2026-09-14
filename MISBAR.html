@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misbar | مسبار</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;900&display=swap');
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+            color: var(--font-color);
+        }
+        :root{
+            --gold-color: #b79012;
+            --bg-color: #fffdf6;
+            --dark-color: #acacac;
+            --font-color: #000;
+        }
+        body{
+            direction: rtl;
+            background-color: var(--bg-color);
+        }
+        .special{
+            color: var(--gold-color);
+        }
+        hr{
+            padding-top: 3px;
+            margin: 0 auto;
+            height: 1px;
+            border-radius: 5px;
+            width: 90%;
+            background-color: var(--gold-color);
+            border-style: none;
+        }
+        .title-of-container{
+            margin: 8% 15% 2% 15%;
+        }
+        .title-of-container .title{
+            font-size: 45px;
+            font-weight: 900;
+        }
+        .title-of-container p{
+            word-spacing: 6px;
+            margin-bottom: 10px;
+            font-size: 25px;
+            font-weight: 400;
+            color: var(--dark-color);
+        }
+        .ratios{
+            margin: 25px;
+            margin-top: 37px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        .ratios .box{
+            width: 25%;
+            transition: .3s ease;
+        }
+        .ratios .box:hover{
+            transform: scale(1.05);
+            border-radius: 5px;
+        }
+        .ratios .box h2{
+            font-size: 30px;
+            font-weight: 600;
+        }
+        .ratios .box p{
+            margin-top: 10px;
+            line-height: 25px;
+            font-weight: 400;
+        }
+        .problem-box, .solution-box{
+            margin: 25px;
+        }
+        .problem-box .title-box, .solution-box .title-box, .ingredients-box .title-box, .targeted-enitites .title-box{
+            color: var(--gold-color);
+            font-size: 20px;
+            margin-right: 30px;
+            font-weight: 900;
+            margin-top: 40px;
+        }
+        .problem-box .problem-text{
+            border-right: 8px solid var(--gold-color);
+            border-radius: 5px;
+            padding: 10px 17px;
+            font-weight: 400;
+            line-height: 30px;
+        }
+        .solution-box .solution-text .title-solution{
+            font-weight: 900;
+            font-size: 20px;
+        }
+        .solution-box .solution-text .solution-section{
+            font-weight: 400;
+            padding: 2px 5px;
+        }
+        .ingredients-box{
+            border-right: 8px solid var(--gold-color);
+            margin: 20px;
+            border-radius: 5px;
+        }
+        .ingredients-box .cards{
+            margin: 25px;
+            margin-top: 37px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+        .ingredients-box .cards .card{
+            border-top: 4px solid var(--gold-color);
+            border-bottom: 4px solid var(--gold-color);
+            border-radius: 10px;
+            width: 30%;
+            transition: 0.3s ease;
+            padding-bottom: 25px;
+            box-shadow: #000000c5 0px 0px 15px;
+        }
+        .ingredients-box .cards .card:hover{
+            box-shadow: #000000c5 10px 10px 15px;
+            transform: scale(1.01);
+        }
+        .ingredients-box .cards .card .title-card{
+            font-weight: 900;
+            padding: 23px 15px;
+            font-size: 20px;
+        }
+        .ingredients-box .cards .card p{
+            color: var(--dark-color);
+        }
+        .obj-and-out{
+            display: flex;
+            justify-content: space-around;
+            margin-top: 100px;
+        }
+        .obj-and-out .obj-box, .obj-and-out .out-box{
+            border: 3px solid var(--gold-color);
+            border-radius: 10px;
+            padding: 10px;
+            width: 40%;
+            transition: 0.4s ease;
+            box-shadow: #000 0px 0px 10px;
+        }
+        .obj-and-out .obj-box:hover, .obj-and-out .out-box:hover{
+            box-shadow: #000 10px 10px 27px;
+            transform: scale(1.02);
+        }
+        .obj-and-out .obj-box h1, .obj-and-out .out-box h1{
+            color: var(--font-color);
+            font-size: 20px;
+            padding: 15px;
+            font-weight: 900;
+        }
+        .obj-and-out .obj-box .pargrhaph-box p, .obj-and-out .out-box .pargrhaph-box p{
+            color: var(--dark-color);
+            font-weight: 400;
+        }
+        .obj-and-out .obj-box .pargrhaph-box, .obj-and-out .out-box .pargrhaph-box{
+            padding: 20px;
+        }
+        .targeted-enitites{
+            margin-top: 100px;
+        }
+        .targeted-enitites h4{
+            padding: 3px 20px;
+            margin: 10px;
+            border: 3px solid var(--gold-color);
+            border-radius: 3px;
+        }
+        .targeted-enitites .text-TarAndEni{
+            display: flex;
+            margin: 0 20%;
+        }
+        .border-botomm{
+            display: flex;
+            padding: 15px;
+            justify-content: space-around;
+            align-items: center;
+            border: 3px solid var(--gold-color);
+            margin: 20px auto;
+            width: 80%;
+        }
+        .border-botomm .r1{
+            width: 68%;
+        }
+        .border-botomm .r1 h1{
+            color: var(--dark-color);
+            font-size: 25px;
+            font-weight: 900;
+        }
+        .border-botomm .r2{
+            width: 10%;
+        }
+        .border-botomm .r2 h3{
+            font-weight: 400;
+            text-align: center;
+        }
+        .border-botomm .r3{
+            width: 10%;
+        }
+        .border-botomm .r3 h3{
+            text-align: center;
+            font-weight: 400;
+        }
+        footer{
+            display: flex;
+            width: 80%;
+            margin: 5px auto;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 50px;
+        }
+        footer p{
+            color: var(--dark-color);
+        }
+        footer .title-box{
+            color: var(--gold-color);
+        }
+        @media (max-width: 992px) {
+    .title-of-container {
+        margin: 5% 5% 2% 5%;
+    }
+    .title-of-container .title {
+        font-size: 35px;
+    }
+    .title-of-container p {
+        font-size: 20px;
+    }
+    .ingredients-box .cards {
+        gap: 15px;
+    }
+    .ingredients-box .cards .card {
+        width: 32%;
+    }
+    .obj-and-out .obj-box, 
+    .obj-and-out .out-box {
+        width: 46%;
+    }
+    .targeted-enitites .text-TarAndEni {
+        margin: 0 5%;
+    }
+    .border-botomm {
+        width: 90%;
+    }
+    .border-botomm .r1 h1 {
+        font-size: 20px;
+    }
+}
+
+/* للهواتف الذكية والشاشات الصغيرة (أقل من 768px) */
+@media (max-width: 768px) {
+    .title-of-container {
+        text-align: center;
+        margin: 30px 15px 15px 15px;
+    }
+    .title-of-container .title {
+        font-size: 30px;
+    }
+    .title-of-container p {
+        font-size: 18px;
+        word-spacing: 2px;
+    }
+    
+    /* تحويل العناصر الأفقية إلى عمودية */
+    .ratios {
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+    .ratios .box {
+        width: 100%;
+    }
+
+    .problem-box .title-box, 
+    .solution-box .title-box, 
+    .ingredients-box .title-box, 
+    .targeted-enitites .title-box {
+        margin-right: 10px;
+        font-size: 18px;
+    }
+
+    .ingredients-box .cards {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .ingredients-box .cards .card {
+        width: 100%;
+    }
+
+    .obj-and-out {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+        margin-top: 50px;
+    }
+    .obj-and-out .obj-box, 
+    .obj-and-out .out-box {
+        width: 90%;
+    }
+
+    .targeted-enitites {
+        margin-top: 50px;
+    }
+    .targeted-enitites .text-TarAndEni {
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
+    .targeted-enitites h4 {
+        text-align: center;
+    }
+
+    .border-botomm {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        width: 90%;
+    }
+    .border-botomm .r1, 
+    .border-botomm .r2, 
+    .border-botomm .r3 {
+        width: 100%;
+    }
+
+    footer {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}
+
+/* للهواتف الصغيرة جداً (أقل من 480px) */
+@media (max-width: 480px) {
+    .title-of-container .title {
+        font-size: 24px;
+    }
+    .title-of-container p {
+        font-size: 15px;
+    }
+    .ratios .box h2 {
+        font-size: 24px;
+    }
+    .problem-box, .solution-box, .ingredients-box {
+        margin: 10px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="title-of-container">
+        <h1 class="title">مسبار <span class="special">|</span> Misbar</h1>
+        <p>المركز الوطني الرقمي للمواهب الكروية السعودية</p>
+    </div> 
+    <hr>
+    <div class="ratios">
+        <div class="box">
+            <h2>+500</h2>
+            <p>موهبة مستهدفة للتسجيل في العام الأول</p>
+        </div>
+        <div class="box">
+            <h2>60%</h2>
+            <p>تقليل زمن اكتشاف الموهبة ووصولها للنادي</p>
+        </div>
+        <div class="box">
+            <h2>+20</h2>
+            <p>جهة رياضية معتمدة مرتبطة بالمنصة</p>
+        </div>
+    </div>
+    <div class="problem-box">
+        <h1 class="title-box">الـمـشـكـلـة</h1>
+        <div class="problem-text">
+            <p>آلاف المواهب الشابة في <span class="special">الأكاديميات الخاصة غير المرتبطة بالدوري</span>، أو التي تظهر في الفعاليات والمعسكرات المجتمعية، لا تملك <span class="special">قناة رقمية موحدة</span> أو نافذة نظامية ترفع تقاريرها وتقييماتها للأندية والمنتخب السعودي.</p>
+        </div>
+    </div>
+    <div class="solution-box" style="margin-top: 50px;">
+        <h1 class="title-box">الـحـل</h1>
+        <div class="solution-text">
+            <h3 class="title-solution">منصة وطنية رقمية تربط المواهب بصانع القرار</h3>
+            <p class="solution-section">قاعدة بيانات مركزية موثوقة تجمع بيانات المواهب من جهات معتمدة — أكاديميات، كشافين، وأندية — وتوفرها لصانعي القرار في الاتحاد السعودي والمنتخبات الوطنية</p>
+        </div>
+    </div>
+    <div class="ingredients-box">
+        <h1 class="title-box">مـكـونـات الـمـنـصـة</h1>
+        <div class="cards">
+            <div class="card">
+                <h1 class="title-card">السجل الوطني للمواهب</h1>
+                <p>ملف رقمي لكل لاعب يشمل البيانات الفنية و البدنية والتاريخ النطوري</p>
+            </div>
+            <div class="card">
+                <h1 class="title-card">خريطة المواهب التفاعلية</h1>
+                <p>توزيع جغرافي للمواهب حسب المناطق والأعمار والمراكز</p>
+            </div>
+            <div class="card">
+                <h1 class="title-card">مركز التحليل الذكي</h1>
+                <p>تقارير إحصائية ومؤشرات أداء تدعم القرار الرياضي بالبيانات</p>
+            </div>
+        </div>
+    </div>
+    <div class="obj-and-out">
+        <div class="obj-box">
+            <h1>الاهـداف</h1>
+            <hr style="width: 100%;">
+            <div class="pargrhaph-box">
+                <p>توحيد بيانات المواهب في مرجع وطني واحد.</p><br>
+                <p>ربط الأكاديميات والكشافين بالأندية والمنتخب.</p><br>
+                <p>ضمان وصول كل موهبة للفرصة التي تستحقها.</p><br>
+                <p>الاستفادة من الذكاء الاصطناعي في تقييم اللاعبي.</p>
+            </div>
+        </div>
+        <div class="out-box">
+            <h1>الـنـتـائـج الـمـتـوقـعـة</h1>
+            <hr style="width: 100%;">
+            <div class="pargrhaph-box">
+                <p>اكتشاف أسرع وأدق للمواهب الواعدة.</p><br>
+                <p>قرارات رياضية مبنية على بيانات حقيقية.</p><br>
+                <p>تقليل الفجوة بين المناطق في إتاحة الفرص.</p><br>
+                <p>بنية تحتية رقمية تخدم كرة القدم السعودية.</p>
+            </div>
+        </div>
+    </div>
+    <div class="targeted-enitites">
+        <h1 class="title-box">الجـهـات الـمـسـتـهـدفـة</h1><br>
+        <div class="text-TarAndEni">
+            <div class="tar-eni">
+                <h4>الاتحاد السعودي لكرة القدم</h4>
+                <h4>المنتخبات الوطنية</h4>
+            </div>
+            <div class="tar-eni">
+                <h4>الأندية الرياضية</h4>
+                <h4>الأكاديميات الكروية</h4>
+            </div>
+            <div class="tar-eni">
+                <h4>الكشافون و المدربون</h4>
+                <h4>وزارة الرياضة</h4>
+            </div>
+        </div>
+    </div>
+    <div class="border-botomm">
+        <div class="r1">
+            <h1>يدعم تحقيق <span class="special">رؤية 2030 </span>في تطوير القطاع الرياضي</h1>
+        </div>
+        <div class="r2">
+            <h3>رؤية 2030</h3>
+        </div>
+        <div class="r3">
+            <h3>كأس العالم 2034</h3>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <footer>
+        <p>لأن كل موهبة تستحق أن ترى</p>
+        <h1 class="title-box">مـسـبـار</h1>
+    </footer>
+</body>
+</html>
