@@ -1,460 +1,675 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Misbar|مسبار</title>
+    <title>مسبار | Misbar</title>
+    <!-- خط القاهرة وطاقم الأيقونات -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;900&display=swap');
-        *{
-            padding: 0;
+        :root {
+            --primary: #10b981; /* زمردي نيون */
+            --primary-glow: rgba(16, 185, 129, 0.3);
+            --accent: #06b6d4;
+            --bg-main: #050811;
+            --card-bg: rgba(13, 22, 38, 0.7);
+            --border: rgba(16, 185, 129, 0.2);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
             margin: 0;
+            padding: 0;
             box-sizing: border-box;
             font-family: 'Cairo', sans-serif;
-            color: var(--font-color);
         }
-        :root{
-            --gold-color: #b79012;
-            --bg-color: #fffdf6;
-            --dark-color: #acacac;
-            --font-color: #000;
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
         }
-        body{
-            direction: rtl;
-            background-color: var(--bg-color);
+
+        /* خلفية الجزيئات التفاعلية */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
-        .special{
-            color: var(--gold-color);
-        }
-        hr{
-            padding-top: 3px;
+
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
-            height: 1px;
-            border-radius: 5px;
-            width: 90%;
-            background-color: var(--gold-color);
-            border-style: none;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
         }
-        .title-of-container{
-            margin: 8% 15% 2% 15%;
-        }
-        .title-of-container .title{
-            font-size: 45px;
-            font-weight: 900;
-        }
-        .title-of-container p{
-            word-spacing: 6px;
-            margin-bottom: 10px;
-            font-size: 25px;
-            font-weight: 400;
-            color: var(--dark-color);
-        }
-        .ratios{
-            margin: 25px;
-            margin-top: 37px;
-            display: flex;
-            justify-content: space-around;
+
+        /* الهيدر مع تأثير الكتابة */
+        header {
+            padding: 90px 0 40px 0;
             text-align: center;
         }
-        .ratios .box{
-            width: 25%;
-            transition: .3s ease;
-        }
-        .ratios .box:hover{
-            transform: scale(1.05);
-            border-radius: 5px;
-        }
-        .ratios .box h2{
-            font-size: 30px;
-            font-weight: 600;
-        }
-        .ratios .box p{
-            margin-top: 10px;
-            line-height: 25px;
-            font-weight: 400;
-        }
-        .problem-box, .solution-box{
-            margin: 25px;
-        }
-        .problem-box .title-box, .solution-box .title-box, .ingredients-box .title-box, .targeted-enitites .title-box{
-            color: var(--gold-color);
-            font-size: 20px;
-            margin-right: 30px;
-            font-weight: 900;
-            margin-top: 40px;
-        }
-        .problem-box .problem-text{
-            border-right: 8px solid var(--gold-color);
-            border-radius: 5px;
-            padding: 10px 17px;
-            font-weight: 400;
-            line-height: 30px;
-        }
-        .solution-box .solution-text .title-solution{
-            font-weight: 900;
-            font-size: 20px;
-        }
-        .solution-box .solution-text .solution-section{
-            font-weight: 400;
-            padding: 2px 5px;
-        }
-        .ingredients-box{
-            border-right: 8px solid var(--gold-color);
-            margin: 20px;
-            border-radius: 5px;
-        }
-        .ingredients-box .cards{
-            margin: 25px;
-            margin-top: 37px;
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-        }
-        .ingredients-box .cards .card{
-            border-top: 4px solid var(--gold-color);
-            border-bottom: 4px solid var(--gold-color);
-            border-radius: 10px;
-            width: 30%;
-            transition: 0.3s ease;
-            padding-bottom: 25px;
-            box-shadow: #000000c5 0px 0px 15px;
-        }
-        .ingredients-box .cards .card:hover{
-            box-shadow: #000000c5 10px 10px 15px;
-            transform: scale(1.01);
-        }
-        .ingredients-box .cards .card .title-card{
-            font-weight: 900;
-            padding: 23px 15px;
-            font-size: 20px;
-        }
-        .ingredients-box .cards .card p{
-            color: var(--dark-color);
-        }
-        .obj-and-out{
-            display: flex;
-            justify-content: space-around;
-            margin-top: 100px;
-        }
-        .obj-and-out .obj-box, .obj-and-out .out-box{
-            border: 3px solid var(--gold-color);
-            border-radius: 10px;
-            padding: 10px;
-            width: 40%;
-            transition: 0.4s ease;
-            box-shadow: #000 0px 0px 10px;
-        }
-        .obj-and-out .obj-box:hover, .obj-and-out .out-box:hover{
-            box-shadow: #000 10px 10px 27px;
-            transform: scale(1.02);
-        }
-        .obj-and-out .obj-box h1, .obj-and-out .out-box h1{
-            color: var(--font-color);
-            font-size: 20px;
-            padding: 15px;
-            font-weight: 900;
-        }
-        .obj-and-out .obj-box .pargrhaph-box p, .obj-and-out .out-box .pargrhaph-box p{
-            color: var(--dark-color);
-            font-weight: 400;
-        }
-        .obj-and-out .obj-box .pargrhaph-box, .obj-and-out .out-box .pargrhaph-box{
-            padding: 20px;
-        }
-        .targeted-enitites{
-            margin-top: 100px;
-        }
-        .targeted-enitites h4{
-            padding: 3px 20px;
-            margin: 10px;
-            border: 3px solid var(--gold-color);
-            border-radius: 3px;
-        }
-        .targeted-enitites .text-TarAndEni{
-            display: flex;
-            margin: 0 20%;
-        }
-        .border-botomm{
-            display: flex;
-            padding: 15px;
-            justify-content: space-around;
+
+        .badge {
+            display: inline-flex;
             align-items: center;
-            border: 3px solid var(--gold-color);
-            margin: 20px auto;
-            width: 80%;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            box-shadow: 0 0 15px var(--primary-glow);
         }
-        .border-botomm .r1{
-            width: 68%;
-        }
-        .border-botomm .r1 h1{
-            color: var(--dark-color);
-            font-size: 25px;
+
+        .hero-title {
+            font-size: 3.8rem;
             font-weight: 900;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .border-botomm .r2{
-            width: 10%;
+
+        .typewriter-text {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            min-height: 2.2em;
+            display: inline-block;
         }
-        .border-botomm .r2 h3{
-            font-weight: 400;
+
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: var(--primary);
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* شبكة الأرقام التفاعلية */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px 20px;
             text-align: center;
+            backdrop-filter: blur(12px);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            transform-style: preserve-3d;
+            will-change: transform;
         }
-        .border-botomm .r3{
-            width: 10%;
+
+        .stat-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px var(--primary-glow);
         }
-        .border-botomm .r3 h3{
-            text-align: center;
-            font-weight: 400;
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px var(--primary-glow);
         }
-        footer{
+
+        .stat-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        /* الأقسام العامة */
+        .section-box {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 35px;
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .section-box.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
             display: flex;
-            width: 80%;
-            margin: 5px auto;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .section-header i {
+            font-size: 1.8rem;
+            color: var(--primary);
+            background: rgba(16, 185, 129, 0.1);
+            padding: 12px;
+            border-radius: 12px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .problem-text {
+            border-right: 4px solid var(--primary);
+            padding-right: 20px;
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #cbd5e1;
+        }
+
+        /* مكونات المنصة (بطاقات ثلاثية الأبعاد) */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .tilt-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 35px;
+            transition: border-color 0.3s;
+            transform-style: preserve-3d;
+        }
+
+        .tilt-card:hover {
+            border-color: var(--primary);
+        }
+
+        .card-icon {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            transform: translateZ(20px);
+        }
+
+        .tilt-card h3 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #fff;
+            transform: translateZ(15px);
+        }
+
+        .tilt-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            transform: translateZ(10px);
+        }
+
+        /* الأهداف والنتائج المتوقعة */
+        .two-column-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .custom-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .custom-list li {
+            position: relative;
+            padding-right: 35px;
+            margin-bottom: 18px;
+            color: #cbd5e1;
+            font-size: 1.1rem;
+        }
+
+        .custom-list li::before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            right: 0;
+            top: 2px;
+            color: var(--primary);
+            background: rgba(16, 185, 129, 0.15);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+        }
+
+        /* الجهات المستهدفة */
+        .entities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .entity-tag {
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid var(--border);
+            padding: 18px 20px;
+            border-radius: 14px;
+            text-align: center;
+            font-weight: 600;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s;
+            cursor: default;
+        }
+
+        .entity-tag:hover {
+            background: var(--primary);
+            color: var(--bg-main);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px var(--primary-glow);
+        }
+
+        .entity-tag:hover i {
+            color: var(--bg-main);
+        }
+
+        .entity-tag i {
+            color: var(--primary);
+            transition: color 0.3s;
+        }
+
+        /* بنر الرؤية */
+        .vision-banner {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(6, 182, 212, 0.05) 100%);
+            border: 1px solid var(--primary);
+            border-radius: 24px;
+            padding: 40px;
+            margin: 50px 0;
+            display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.1);
         }
-        footer p{
-            color: var(--dark-color);
+
+        .vision-title {
+            font-size: 1.6rem;
+            font-weight: 700;
         }
-        footer .title-box{
-            color: var(--gold-color);
+
+        .vision-badges {
+            display: flex;
+            gap: 15px;
         }
+
+        .v-badge {
+            background: var(--primary);
+            color: var(--bg-main);
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 900;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px var(--primary-glow);
+        }
+
+        /* الفوتر */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 40px 0;
+            margin-top: 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+
+        footer .brand {
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary);
+        }
+
+        /* التجاوب */
         @media (max-width: 992px) {
-    .title-of-container {
-        margin: 5% 5% 2% 5%;
-    }
-    .title-of-container .title {
-        font-size: 35px;
-    }
-    .title-of-container p {
-        font-size: 20px;
-    }
-    .ingredients-box .cards {
-        gap: 15px;
-    }
-    .ingredients-box .cards .card {
-        width: 32%;
-    }
-    .obj-and-out .obj-box, 
-    .obj-and-out .out-box {
-        width: 46%;
-    }
-    .targeted-enitites .text-TarAndEni {
-        margin: 0 5%;
-    }
-    .border-botomm {
-        width: 90%;
-    }
-    .border-botomm .r1 h1 {
-        font-size: 20px;
-    }
-}
+            .two-column-grid {
+                grid-template-columns: 1fr;
+            }
+        }
 
-/* للهواتف الذكية والشاشات الصغيرة (أقل من 768px) */
-@media (max-width: 768px) {
-    .title-of-container {
-        text-align: center;
-        margin: 30px 15px 15px 15px;
-    }
-    .title-of-container .title {
-        font-size: 30px;
-    }
-    .title-of-container p {
-        font-size: 18px;
-        word-spacing: 2px;
-    }
-    
-    /* تحويل العناصر الأفقية إلى عمودية */
-    .ratios {
-        flex-direction: column;
-        gap: 20px;
-        align-items: center;
-    }
-    .ratios .box {
-        width: 100%;
-    }
-
-    .problem-box .title-box, 
-    .solution-box .title-box, 
-    .ingredients-box .title-box, 
-    .targeted-enitites .title-box {
-        margin-right: 10px;
-        font-size: 18px;
-    }
-
-    .ingredients-box .cards {
-        flex-direction: column;
-        align-items: center;
-        gap: 20px;
-    }
-    .ingredients-box .cards .card {
-        width: 100%;
-    }
-
-    .obj-and-out {
-        flex-direction: column;
-        align-items: center;
-        gap: 25px;
-        margin-top: 50px;
-    }
-    .obj-and-out .obj-box, 
-    .obj-and-out .out-box {
-        width: 90%;
-    }
-
-    .targeted-enitites {
-        margin-top: 50px;
-    }
-    .targeted-enitites .text-TarAndEni {
-        flex-direction: column;
-        align-items: center;
-        margin: 0;
-    }
-    .targeted-enitites h4 {
-        text-align: center;
-    }
-
-    .border-botomm {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-        width: 90%;
-    }
-    .border-botomm .r1, 
-    .border-botomm .r2, 
-    .border-botomm .r3 {
-        width: 100%;
-    }
-
-    footer {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-}
-
-/* للهواتف الصغيرة جداً (أقل من 480px) */
-@media (max-width: 480px) {
-    .title-of-container .title {
-        font-size: 24px;
-    }
-    .title-of-container p {
-        font-size: 15px;
-    }
-    .ratios .box h2 {
-        font-size: 24px;
-    }
-    .problem-box, .solution-box, .ingredients-box {
-        margin: 10px;
-    }
-}
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.6rem;
+            }
+            .typewriter-text {
+                font-size: 1.15rem;
+            }
+            .vision-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="title-of-container">
-        <h1 class="title">مسبار <span class="special">|</span> Misbar</h1>
-        <p>المركز الوطني الرقمي للمواهب الكروية السعودية</p>
-    </div> 
-    <hr>
-    <div class="ratios">
-        <div class="box">
-            <h2>+500</h2>
-            <p>موهبة مستهدفة للتسجيل في العام الأول</p>
+
+    <!-- خلفية حركية تفاعلية -->
+    <canvas id="particles-canvas"></canvas>
+
+    <div class="container">
+        <!-- الهيدر -->
+        <header>
+            <div class="badge"><i class="fa-solid fa-radar"></i> المنصة الوطنية الرقمية</div>
+            <h1 class="hero-title">مسبار | Misbar</h1>
+            <div class="typewriter-text"><span id="typed-text"></span><span class="cursor">&nbsp;</span></div>
+        </header>
+
+        <!-- شبكة العدادات الحية -->
+        <div class="stats-grid">
+            <div class="stat-card tilt">
+                <div class="stat-number" data-target="500" data-prefix="+">0</div>
+                <div class="stat-desc">موهبة مستهدفة للتسجيل في العام الأول</div>
+            </div>
+            <div class="stat-card tilt">
+                <div class="stat-number" data-target="60" data-suffix="%">0</div>
+                <div class="stat-desc">تقليل زمن اكتشاف الموهبة ووصولها للنادي</div>
+            </div>
+            <div class="stat-card tilt">
+                <div class="stat-number" data-target="20" data-prefix="+">0</div>
+                <div class="stat-desc">جهة رياضية معتمدة مرتبطة بالمنصة</div>
+            </div>
         </div>
-        <div class="box">
-            <h2>60%</h2>
-            <p>تقليل زمن اكتشاف الموهبة ووصولها للنادي</p>
+
+        <!-- المشكلة -->
+        <div class="section-box reveal">
+            <div class="section-header">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h2 class="section-title">المشكلة</h2>
+            </div>
+            <div class="problem-text">
+                آلاف المواهب الشابة في <span class="highlight">الأكاديميات الخاصة غير المرتبطة بالدوري</span>، أو التي تظهر في الفعاليات والمعسكرات المجتمعية، لا تملك <span class="highlight">قناة رقمية موحدة</span> أو نافذة نظامية ترفع تقاريرها وتقييماتها للأندية والمنتخب السعودي.
+            </div>
         </div>
-        <div class="box">
-            <h2>+20</h2>
-            <p>جهة رياضية معتمدة مرتبطة بالمنصة</p>
+
+        <!-- الحل -->
+        <div class="section-box reveal">
+            <div class="section-header">
+                <i class="fa-solid fa-lightbulb"></i>
+                <h2 class="section-title">الحل</h2>
+            </div>
+            <div style="padding-right: 15px;">
+                <h3 style="font-size: 1.4rem; color: #fff; margin-bottom: 10px;">منصة وطنية رقمية تربط المواهب بصانع القرار</h3>
+                <p style="color: var(--text-muted); font-size: 1.15rem; line-height: 1.8;">قاعدة بيانات مركزية موثوقة تجمع بيانات المواهب من جهات معتمدة — أكاديميات، كشافين، وأندية — وتوفرها لصانعي القرار في الاتحاد السعودي والمنتخبات الوطنية.</p>
+            </div>
         </div>
+
+        <!-- مكونات المنصة -->
+        <div class="section-box reveal">
+            <div class="section-header">
+                <i class="fa-solid fa-cubes"></i>
+                <h2 class="section-title">مكونات المنصة</h2>
+            </div>
+            <div class="cards-grid">
+                <div class="tilt-card tilt">
+                    <div class="card-icon"><i class="fa-solid fa-id-card"></i></div>
+                    <h3>السجل الوطني للمواهب</h3>
+                    <p>ملف رقمي لكل لاعب يشمل البيانات الفنية والبدنية والتاريخ التطويري.</p>
+                </div>
+                <div class="tilt-card tilt">
+                    <div class="card-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+                    <h3>خريطة المواهب التفاعلية</h3>
+                    <p>توزيع جغرافي للمواهب حسب المناطق والأعمار والمراكز.</p>
+                </div>
+                <div class="tilt-card tilt">
+                    <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>مركز التحليل الذكي</h3>
+                    <p>تقارير إحصائية ومؤشرات أداء تدعم القرار الرياضي بالبيانات.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- الأهداف والنتائج المتوقعة -->
+        <div class="two-column-grid">
+            <div class="section-box reveal" style="margin-bottom: 0;">
+                <div class="section-header">
+                    <i class="fa-solid fa-bullseye"></i>
+                    <h2 class="section-title">الأهداف</h2>
+                </div>
+                <ul class="custom-list">
+                    <li>توحيد بيانات المواهب في مرجع وطني واحد.</li>
+                    <li>ربط الأكاديميات والكشافين بالأندية والمنتخب.</li>
+                    <li>ضمان وصول كل موهبة للفرصة التي تستحقها.</li>
+                    <li>الاستفادة من الذكاء الاصطناعي في تقييم اللاعبين.</li>
+                </ul>
+            </div>
+
+            <div class="section-box reveal" style="margin-bottom: 0;">
+                <div class="section-header">
+                    <i class="fa-solid fa-square-poll-vertical"></i>
+                    <h2 class="section-title">النتائج المتوقعة</h2>
+                </div>
+                <ul class="custom-list">
+                    <li>اكتشاف أسرع وأدق للمواهب الواعدة.</li>
+                    <li>قرارات رياضية مبنية على بيانات حقيقية.</li>
+                    <li>تقليل الفجوة بين المناطق في إتاحة الفرص.</li>
+                    <li>بنية تحتية رقمية تخدم كرة القدم السعودية.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- الجهات المستهدفة -->
+        <div class="section-box reveal">
+            <div class="section-header">
+                <i class="fa-solid fa-users-gear"></i>
+                <h2 class="section-title">الجهات المستهدفة</h2>
+            </div>
+            <div class="entities-grid">
+                <div class="entity-tag"><i class="fa-solid fa-shield-halved"></i> الاتحاد السعودي لكرة القدم</div>
+                <div class="entity-tag"><i class="fa-solid fa-flag"></i> المنتخبات الوطنية</div>
+                <div class="entity-tag"><i class="fa-solid fa-trophy"></i> الأندية الرياضية</div>
+                <div class="entity-tag"><i class="fa-solid fa-graduation-cap"></i> الأكاديميات الكروية</div>
+                <div class="entity-tag"><i class="fa-solid fa-user-ninja"></i> الكشافون والمدربون</div>
+                <div class="entity-tag"><i class="fa-solid fa-building-columns"></i> وزارة الرياضة</div>
+            </div>
+        </div>
+
+        <!-- بنر الرؤية -->
+        <div class="vision-banner reveal">
+            <div class="vision-title">
+                يدعم تحقيق <span class="highlight">رؤية 2030</span> في تطوير القطاع الرياضي
+            </div>
+            <div class="vision-badges">
+                <span class="v-badge">رؤية 2030</span>
+                <span class="v-badge">كأس العالم 2034</span>
+            </div>
+        </div>
+
+        <!-- الفوتر -->
+        <footer>
+            <p>لأن كل موهبة تستحق أن تُرى</p>
+            <div class="brand">مـسـبـار</div>
+        </footer>
     </div>
-    <div class="problem-box">
-        <h1 class="title-box">الـمـشـكـلـة</h1>
-        <div class="problem-text">
-            <p>آلاف المواهب الشابة في <span class="special">الأكاديميات الخاصة غير المرتبطة بالدوري</span>، أو التي تظهر في الفعاليات والمعسكرات المجتمعية، لا تملك <span class="special">قناة رقمية موحدة</span> أو نافذة نظامية ترفع تقاريرها وتقييماتها للأندية والمنتخب السعودي.</p>
-        </div>
-    </div>
-    <div class="solution-box" style="margin-top: 50px;">
-        <h1 class="title-box">الـحـل</h1>
-        <div class="solution-text">
-            <h3 class="title-solution">منصة وطنية رقمية تربط المواهب بصانع القرار</h3>
-            <p class="solution-section">قاعدة بيانات مركزية موثوقة تجمع بيانات المواهب من جهات معتمدة — أكاديميات، كشافين، وأندية — وتوفرها لصانعي القرار في الاتحاد السعودي والمنتخبات الوطنية</p>
-        </div>
-    </div>
-    <div class="ingredients-box">
-        <h1 class="title-box">مـكـونـات الـمـنـصـة</h1>
-        <div class="cards">
-            <div class="card">
-                <h1 class="title-card">السجل الوطني للمواهب</h1>
-                <p>ملف رقمي لكل لاعب يشمل البيانات الفنية و البدنية والتاريخ النطوري</p>
-            </div>
-            <div class="card">
-                <h1 class="title-card">خريطة المواهب التفاعلية</h1>
-                <p>توزيع جغرافي للمواهب حسب المناطق والأعمار والمراكز</p>
-            </div>
-            <div class="card">
-                <h1 class="title-card">مركز التحليل الذكي</h1>
-                <p>تقارير إحصائية ومؤشرات أداء تدعم القرار الرياضي بالبيانات</p>
-            </div>
-        </div>
-    </div>
-    <div class="obj-and-out">
-        <div class="obj-box">
-            <h1>الاهـداف</h1>
-            <hr style="width: 100%;">
-            <div class="pargrhaph-box">
-                <p>توحيد بيانات المواهب في مرجع وطني واحد.</p><br>
-                <p>ربط الأكاديميات والكشافين بالأندية والمنتخب.</p><br>
-                <p>ضمان وصول كل موهبة للفرصة التي تستحقها.</p><br>
-                <p>الاستفادة من الذكاء الاصطناعي في تقييم اللاعبي.</p>
-            </div>
-        </div>
-        <div class="out-box">
-            <h1>الـنـتـائـج الـمـتـوقـعـة</h1>
-            <hr style="width: 100%;">
-            <div class="pargrhaph-box">
-                <p>اكتشاف أسرع وأدق للمواهب الواعدة.</p><br>
-                <p>قرارات رياضية مبنية على بيانات حقيقية.</p><br>
-                <p>تقليل الفجوة بين المناطق في إتاحة الفرص.</p><br>
-                <p>بنية تحتية رقمية تخدم كرة القدم السعودية.</p>
-            </div>
-        </div>
-    </div>
-    <div class="targeted-enitites">
-        <h1 class="title-box">الجـهـات الـمـسـتـهـدفـة</h1><br>
-        <div class="text-TarAndEni">
-            <div class="tar-eni">
-                <h4>الاتحاد السعودي لكرة القدم</h4>
-                <h4>المنتخبات الوطنية</h4>
-            </div>
-            <div class="tar-eni">
-                <h4>الأندية الرياضية</h4>
-                <h4>الأكاديميات الكروية</h4>
-            </div>
-            <div class="tar-eni">
-                <h4>الكشافون و المدربون</h4>
-                <h4>وزارة الرياضة</h4>
-            </div>
-        </div>
-    </div>
-    <div class="border-botomm">
-        <div class="r1">
-            <h1>يدعم تحقيق <span class="special">رؤية 2030 </span>في تطوير القطاع الرياضي</h1>
-        </div>
-        <div class="r2">
-            <h3>رؤية 2030</h3>
-        </div>
-        <div class="r3">
-            <h3>كأس العالم 2034</h3>
-        </div>
-    </div>
-    <br>
-    <hr>
-    <footer>
-        <p>لأن كل موهبة تستحق أن ترى</p>
-        <h1 class="title-box">مـسـبـار</h1>
-    </footer>
+
+    <!-- السكريبت التفاعلي الحركي -->
+    <script>
+        // 1. تأثير الكتابة الحية (Typewriter Effect)
+        const subtitleText = "المركز الوطني الرقمي للمواهب الكروية السعودية";
+        const typedElement = document.getElementById('typed-text');
+        let charIndex = 0;
+
+        function typeEffect() {
+            if (charIndex < subtitleText.length) {
+                typedElement.textContent += subtitleText.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeEffect, 50);
+            }
+        }
+        window.addEventListener('DOMContentLoaded', typeEffect);
+
+        // 2. خلفية الجزيئات الحية (Particle Canvas)
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        const particles = [];
+        const particleCount = 45;
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 2 + 1,
+                vx: (Math.random() - 0.5) * 0.5,
+                vy: (Math.random() - 0.5) * 0.5,
+                alpha: Math.random() * 0.5 + 0.2
+            });
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0) p.x = canvas.width;
+                if (p.x > canvas.width) p.x = 0;
+                if (p.y < 0) p.y = canvas.height;
+                if (p.y > canvas.height) p.y = 0;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(16, 185, 129, ${p.alpha})`;
+                ctx.fill();
+            });
+
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // 3. عدادات الأرقام التفاعلية عند الوصول إليها (Animated Counters)
+        const stats = document.querySelectorAll('.stat-number');
+        let animated = false;
+
+        function countUp() {
+            stats.forEach(stat => {
+                const target = +stat.getAttribute('data-target');
+                const prefix = stat.getAttribute('data-prefix') || '';
+                const suffix = stat.getAttribute('data-suffix') || '';
+                const speed = 200; // سرعة العداد
+
+                const updateCount = () => {
+                    const count = +stat.innerText.replace(/[^0-9]/g, '');
+                    const inc = target / speed;
+
+                    if (count < target) {
+                        stat.innerText = prefix + Math.ceil(count + inc) + suffix;
+                        setTimeout(updateCount, 15);
+                    } else {
+                        stat.innerText = prefix + target + suffix;
+                    }
+                };
+
+                updateCount();
+            });
+        }
+
+        // 4. ظهور العناصر تدريجياً مع التمرير (Scroll Reveal)
+        const observerOptions = { threshold: 0.15 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (!animated && entry.target.classList.contains('stats-grid')) {
+                        countUp();
+                        animated = true;
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        const statsGrid = document.querySelector('.stats-grid');
+        if (statsGrid) observer.observe(statsGrid);
+
+        // 5. تأثير حركة 3D للبطاقات عند تحريك الماوس (Tilt Effect)
+        const tiltCards = document.querySelectorAll('.tilt');
+
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = (y - centerY) / 12;
+                const rotateY = (centerX - x) / 12;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)`;
+            });
+        });
+    </script>
 </body>
 </html>
